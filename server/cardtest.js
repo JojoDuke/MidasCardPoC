@@ -7,8 +7,8 @@ const flw = new Flutterwave("FLWPUBK_TEST-63a79c5a6fe457d75a611b0f376e3e53-X", "
 // Payload: Flutterwave Card Details
 const payload = {
     "currency": "USD",
-    "amount": 20,
-    "billing_name": "Nardo Wicky",
+    "amount": 50,
+    "billing_name": "Daniel Odd",
     "billing_address": "2014 Forest Hills Drive",
     "billing_city": "React",
     "billing_state": "NY",

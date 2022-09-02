@@ -1,0 +1,56 @@
+.details-div{
+    margin: 20px 50px;
+    background-color: rgb(241, 241, 241);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    height: 300px;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+}
+
+/*------------------------------------------------------*/
+
+.vcard{
+    background-color: rgb(170, 170, 170);
+    border-radius: 10px;
+    padding: 10px;
+    width: 40%;
+    margin: 20px 50px;
+}
+
+
+.createCardBtn {
+  background-color: #fff000;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.createCardBtn:not(:disabled):hover,
+.createCardBtn:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.createCardBtn:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}

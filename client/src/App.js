@@ -22,18 +22,24 @@ function App() {
 
   return (
     <div>
-      <h2>Card Holder : {cardHolder}</h2>
-      <h2>Card Number : {cardNumber}</h2>
-      <h2>Card Balance : {balance}</h2>
-      <h2>Expiry Date : {expDate}</h2>
-      <h2>CVC : {cvc}</h2>
+      <div className='vcard'>
+        <h2>Card Holder : {cardHolder}</h2>
+        <h2>Card Number : {cardNumber}</h2>
+        <h2>Card Balance : {balance}</h2>
+        <h2>Expiry Date : {expDate}</h2>
+        <h2>CVC : {cvc}</h2>
+      </div>
 
-      <form>
-        
-      </form>
-      <button onClick={getCardData}>
-        Create Card
-      </button>
+      <div className='details-div'>
+        <form className='details'>
+          <input placeholder='Name on Card' type="text"></input>
+          <input placeholder='Amount (in GHS)' type="text"></input>
+          <input placeholder='MTN MoMo Number' type="text"></input>
+        </form>
+        <button className='createCardBtn' onClick={getCardData}>
+          Create Card
+        </button>
+      </div>
     </div>
   );
 }
