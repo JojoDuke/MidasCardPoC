@@ -22,11 +22,15 @@ function App() {
 
   return (
     <div>
-      <h2>{cardHolder}</h2>
-      <h2>{cardNumber}</h2>
-      <h2>{balance}</h2>
-      <h2>{expDate}</h2>
-      <h2>{cvc}</h2>
+      <h2>Card Holder : {cardHolder}</h2>
+      <h2>Card Number : {cardNumber}</h2>
+      <h2>Card Balance : {balance}</h2>
+      <h2>Expiry Date : {expDate}</h2>
+      <h2>CVC : {cvc}</h2>
+
+      <form>
+        
+      </form>
       <button onClick={getCardData}>
         Create Card
       </button>
