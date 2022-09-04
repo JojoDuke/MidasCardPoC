@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios'
 import './App.css';
 
 function App() {
   const [cardHolder, setCardHolder] = useState("");
-  const [inputCardHolder, setinputCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
+  const cardHolderRef = useRef("");
   const [balance, setBalance] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cvc, setCvc] = useState("");
+
 
   function getCardData() {
     axios.get("http://localhost:5000/", { crossdomain: true })
@@ -21,8 +22,15 @@ function App() {
       })
   };
 
-  const handleInputChange = (event) => {
-    setinputCardHolder(event.target.value);
+  async function createCardData(e) {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/", {
+      cardHolder
+    })
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -37,7 +45,7 @@ function App() {
         </div>
         <div className='expNholder'>
           <h2>Expiry Date<br/> {expDate}</h2>
-          <h2>Card Holder<br/> {inputCardHolder}</h2>
+          <h2>Card Holder<br/> {cardHolder}</h2>
         </div>
       </div>
 
@@ -48,12 +56,12 @@ function App() {
             type="text" 
             id='cardholder'
             name='cardholder'
-            onChange={handleInputChange}
-            value={inputCardHolder}></input>
+            onChange={(e) => setCardHolder(e.target.value)}
+            value={cardHolder}></input>
           <input placeholder='Amount (in USD)' type="text"></input>
           <input placeholder='MTN MoMo Number' type="text"></input>
         </form>
-        <button className='createCardBtn' onClick={getCardData}>
+        <button className='createCardBtn' onClick={createCardData}>
           Create Card
         </button>
       </div>
