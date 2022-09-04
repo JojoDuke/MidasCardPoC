@@ -1,3 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .details-div{
     margin: 20px 50px;
     background-color: rgb(247, 247, 247);
@@ -21,12 +27,29 @@
 
 /*------------------------------------------------------*/
 
+.expNholder{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*------------------------------------------------------*/
+
+
 .vcard{
     background-color: rgb(170, 170, 170);
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px 20px;
     width: 500px;
     margin: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.theCvc{
+    font-size: 17px;
+    font-weight: 400;
 }
 
 

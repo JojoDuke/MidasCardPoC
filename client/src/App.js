@@ -23,11 +23,17 @@ function App() {
   return (
     <div>
       <div className='vcard'>
-        <h2>Card Holder : {cardHolder}</h2>
-        <h2>Card Number : {cardNumber}</h2>
-        <h2>Card Balance : {balance}</h2>
-        <h2>Expiry Date : {expDate}</h2>
-        <h2>CVC : {cvc}</h2>
+        <div className='theBalance'>
+          <h2>{balance}</h2>
+        </div>
+        <div className='numNcvc'>
+          <h2 className='theNum'>{cardNumber}</h2>
+          <h2 className='theCvc'>{cvc}</h2>
+        </div>
+        <div className='expNholder'>
+          <h2>Expiry Date<br/> {expDate}</h2>
+          <h2>Card Holder<br/> {cardHolder}</h2>
+        </div>
       </div>
 
       <div className='details-div'>
