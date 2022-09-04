@@ -1,6 +1,11 @@
 const { response } = require('express');
 const express = require('express');
 const app = express();
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 const Flutterwave = require('flutterwave-node-v3');
 const flw = new Flutterwave("FLWPUBK_TEST-63a79c5a6fe457d75a611b0f376e3e53-X", "FLWSECK_TEST-a6281194ef4ca095e794a1681fe32d69-X");
 
@@ -8,7 +13,7 @@ const flw = new Flutterwave("FLWPUBK_TEST-63a79c5a6fe457d75a611b0f376e3e53-X", "
 const payload = {
     "currency": "USD",
     "amount": 50,
-    "billing_name": "Daniel Odd",
+    "billing_name": "Daniel Odd",// I need the 'inputCardHolder' data to be here
     "billing_address": "2014 Forest Hills Drive",
     "billing_city": "React",
     "billing_state": "NY",

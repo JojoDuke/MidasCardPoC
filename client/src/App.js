@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   const [cardHolder, setCardHolder] = useState("");
+  const [inputCardHolder, setinputCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [balance, setBalance] = useState("");
   const [expDate, setExpDate] = useState("");
@@ -20,6 +21,10 @@ function App() {
       })
   };
 
+  const handleInputChange = (event) => {
+    setinputCardHolder(event.target.value);
+  };
+
   return (
     <div>
       <div className='vcard'>
@@ -32,14 +37,20 @@ function App() {
         </div>
         <div className='expNholder'>
           <h2>Expiry Date<br/> {expDate}</h2>
-          <h2>Card Holder<br/> {cardHolder}</h2>
+          <h2>Card Holder<br/> {inputCardHolder}</h2>
         </div>
       </div>
 
       <div className='details-div'>
         <form className='details'>
-          <input placeholder='Name on Card' type="text"></input>
-          <input placeholder='Amount (in GHS)' type="text"></input>
+          <input 
+            placeholder='Name on Card' 
+            type="text" 
+            id='cardholder'
+            name='cardholder'
+            onChange={handleInputChange}
+            value={inputCardHolder}></input>
+          <input placeholder='Amount (in USD)' type="text"></input>
           <input placeholder='MTN MoMo Number' type="text"></input>
         </form>
         <button className='createCardBtn' onClick={getCardData}>
