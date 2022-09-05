@@ -16,19 +16,33 @@ const jsonParser = bodyParser.json();
 const Flutterwave = require('flutterwave-node-v3');
 const flw = new Flutterwave("FLWPUBK_TEST-63a79c5a6fe457d75a611b0f376e3e53-X", "FLWSECK_TEST-a6281194ef4ca095e794a1681fe32d69-X");
 
-// Payload: Flutterwave Card Details
-const payload = {
-    "currency": "USD",
-    "amount": balance,
-    "billing_name": cardHolder,// I need the 'inputCardHolder' data to be here
-    "billing_address": "2014 Forest Hills Drive",
-    "billing_city": "React",
-    "billing_state": "NY",
-    "billing_postal_code": "000009",
-    "billing_country": "US",
-}
+app.use(bodyParser.json());
 
-flw.VirtualCard.create(payload)
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
+app.post("/", jsonParser, async (req, res) => {
+    const cardHolder = req.body.cardHolder;
+    const balance = req.body.balance;
+    console.log(cardHolder);
+    console.log(balance);
+
+    // Payload: Flutterwave Card Details
+    const payload = {
+        "currency": "USD",
+        "amount": balance,
+        "billing_name": cardHolder,
+        "billing_address": "2014 Forest Hills Drive",
+        "billing_city": "React",
+        "billing_state": "NY",
+        "billing_postal_code": "000009",
+        "billing_country": "US",
+    }
+
+    flw.VirtualCard.create(payload)
     .then(response => {
         console.log(response);
 
@@ -41,24 +55,14 @@ flw.VirtualCard.create(payload)
         app.get("/", cors(), async (req, res) => {
             res.send(response)
         });
-
-        app.use(function(req, res, next) {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-            next();
-          });
-
-        app.use(bodyParser.json());
-
-        app.post("/", jsonParser, async (req, res) => {
-            const cardHolder = req.body.cardHolder;
-            const balance = req.body.balance;
-            console.log(cardHolder);
-            console.log(balance);
-        });
-
-        app.use(bodyParser.json());
     });
+});
+
+app.use(bodyParser.json());
+
+
+
+
 
 app.listen(5000, () => {console.log("Server started on port 5000")})
 

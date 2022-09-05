@@ -6,6 +6,7 @@ function App() {
   const [cardHolder, setCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const cardHolderRef = useRef("");
+  const balanceRef = useRef("");
   const [balance, setBalance] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cvc, setCvc] = useState("");
@@ -26,8 +27,8 @@ function App() {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/", {
-      cardHolder: cardHolder,
-      balance: balance
+      cardHolder: cardHolderRef.current.value,
+      balance: balanceRef.current.value
     })
     } catch (error) {
       console.log(error);
@@ -57,15 +58,13 @@ function App() {
             type="text" 
             id='cardholder'
             name='cardholder'
-            onChange={(e) => setCardHolder(e.target.value)}
-            value={cardHolder}></input>
+            ref={cardHolderRef}></input>
           <input 
             placeholder='Amount (in USD)' 
             type="text"
             id="cardbalance"
             name="cardbalance"
-            onChange={(e) => setBalance(e.target.value)}
-            value={balance}></input>
+            ref={balanceRef}></input>
           <input placeholder='MTN MoMo Number' type="text"></input>
         </form>
         <button className='createCardBtn' onClick={createCardData}>
