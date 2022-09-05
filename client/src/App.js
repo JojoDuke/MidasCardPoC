@@ -26,7 +26,8 @@ function App() {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/", {
-      cardHolder
+      cardHolder: cardHolder,
+      balance: balance
     })
     } catch (error) {
       console.log(error);
@@ -58,7 +59,13 @@ function App() {
             name='cardholder'
             onChange={(e) => setCardHolder(e.target.value)}
             value={cardHolder}></input>
-          <input placeholder='Amount (in USD)' type="text"></input>
+          <input 
+            placeholder='Amount (in USD)' 
+            type="text"
+            id="cardbalance"
+            name="cardbalance"
+            onChange={(e) => setBalance(e.target.value)}
+            value={balance}></input>
           <input placeholder='MTN MoMo Number' type="text"></input>
         </form>
         <button className='createCardBtn' onClick={createCardData}>
