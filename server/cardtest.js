@@ -1,4 +1,3 @@
-//import App from '../client/src/App.js';
 const { response } = require('express');
 const express = require('express');
 const cors = require('cors');

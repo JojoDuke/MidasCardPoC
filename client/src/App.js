@@ -12,8 +12,8 @@ function App() {
   const [cvc, setCvc] = useState("");
 
 
-  function getCardData() {
-    axios.get("http://localhost:5000/", { crossdomain: true })
+  async function getCardData() {
+    await axios.get("http://localhost:5000/", { crossdomain: true })
       .then(response => {
         setCardHolder(response.data.data.name_on_card);
         setCardNumber(response.data.data.card_pan);
@@ -25,14 +25,13 @@ function App() {
 
   async function createCardData(e) {
     e.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/", {
+
+    await axios.post("http://localhost:5000/", {
       cardHolder: cardHolderRef.current.value,
       balance: balanceRef.current.value
-    })
-    } catch (error) {
-      console.log(error);
-    }
+    });
+
+    getCardData();
   };
 
   return (
