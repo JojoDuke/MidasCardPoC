@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
 import './App.css';
 
@@ -10,6 +10,7 @@ function App() {
   const [balance, setBalance] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cvc, setCvc] = useState("");
+  const [userId, setuserId] = useState("");
 
 
   async function getCardData() {
@@ -25,13 +26,10 @@ function App() {
 
   async function createCardData(e) {
     e.preventDefault();
-
     await axios.post("http://localhost:5000/", {
       cardHolder: cardHolderRef.current.value,
       balance: balanceRef.current.value
-    });
-
-    getCardData();
+    })
   };
 
   return (

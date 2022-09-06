@@ -42,26 +42,33 @@ app.post("/", jsonParser, async (req, res) => {
     }
 
     flw.VirtualCard.create(payload)
-    .then(response => {
-        console.log(response);
-
-        app.use(function(req, res, next) {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-            next();
-          });
-
-        app.get("/", cors(), async (req, res) => {
-            res.send(response)
+        .then(response => {
+            console.log(response);
         });
-    });
 });
 
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 
+app.get("/", cors(), async (req, res) => {
+    try {
+        const payload = {
+            "id":""
+        }
+        const responseid = await flw.VirtualCard.fetch(payload)
+        console.log(responseid)
 
+        res.send(responseid)
 
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 app.listen(5000, () => {console.log("Server started on port 5000")})
 
