@@ -3,14 +3,13 @@ import axios from 'axios'
 import './App.css';
 
 function App() {
-  const [cardHolder, setCardHolder] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
   const cardHolderRef = useRef("");
   const balanceRef = useRef("");
+  const [cardHolder, setCardHolder] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
   const [balance, setBalance] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cvc, setCvc] = useState("");
-  const [userId, setuserId] = useState("");
 
 
   async function getCardData() {
@@ -30,6 +29,12 @@ function App() {
       cardHolder: cardHolderRef.current.value,
       balance: balanceRef.current.value
     })
+      .then(
+        await axios.get("http://localhost:5000/")
+          .then(response => {
+            setExpDate(response.data)
+          })
+      )
   };
 
   return (
