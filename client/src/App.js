@@ -1,24 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { usePaystackPayment } from 'react-paystack';
 import axios from 'axios'
 import './App.css';
 
 function App() {
   const cardHolderRef = useRef("");
   const balanceRef = useRef("");
+  const mobileNumRef = useRef("");
   const [cardHolder, setCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [balance, setBalance] = useState("");
   const [expDate, setExpDate] = useState("");
   const [cvc, setCvc] = useState("");
 
+  // Function that creates a new virtual card
   async function createCardData(e) {
     e.preventDefault();
+    initializePayment(onSuccess, onClose);
+  };
+
+  // Instance of a new virtual card(API call)
+  const newCard = async () => {
     const { data, statusText } = await axios.post("http://localhost:5000/", {
       cardHolder: cardHolderRef.current.value,
       balance: balanceRef.current.value
     })
 
-    if (statusText !== 'OK') return "Its an error"
+    if (statusText !== 'OK') return "Its an rror"
     
     setCardHolder(data.data.name_on_card);
     setCardNumber(data.data.card_pan);
@@ -26,6 +34,28 @@ function App() {
     setExpDate(data.data.expiration);
     setCvc(data.data.cvv);
   };
+
+  //#region PAYSTACK INTEGRTION
+
+  // Paystack Popup integration
+  const config = {
+    reference: (new Date()).getTime().toString(),
+    email: "customer@gmail.com",
+    amount: parseInt(balanceRef.current.value) * 100,
+    currency: "GHS",
+    publicKey: 'pk_live_406be5b6cd14a2897d865666a5060a177257050a',
+  };
+
+  const onSuccess = () => {
+    newCard();
+  };
+  
+  const onClose = () => {
+    //console.log("any");
+  };
+
+  const initializePayment = usePaystackPayment(config);
+//#endregion
 
   return (
     <div>
@@ -52,12 +82,11 @@ function App() {
             name='cardholder'
             ref={cardHolderRef}></input>
           <input 
-            placeholder='Amount (in USD)' 
+            placeholder='Amount (in GHS)' 
             type="text"
             id="cardbalance"
             name="cardbalance"
             ref={balanceRef}></input>
-          <input placeholder='MTN MoMo Number' type="text"></input>
         </form>
         <button className='createCardBtn' onClick={createCardData}>
           Create Card
