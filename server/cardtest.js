@@ -50,9 +50,7 @@ app.post("/", jsonParser, async (req, res) => {
     const fetchResponse = await flw.VirtualCard.fetch(newPayload);
     console.log(fetchResponse);
 
-    app.get('/', async (req, res) => {
-        res.send(fetchResponse);
-    })
+    res.send(fetchResponse);
 });
 
 app.use(bodyParser.json());

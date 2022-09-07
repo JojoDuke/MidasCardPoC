@@ -20,11 +20,11 @@ function App() {
 
     if (statusText !== 'OK') return "Its an error"
     
-    setCardHolder(data.name_on_card);
-    setCardNumber(data.card_pan);
-    setBalance(data.amount + "  " + data.currency);
-    setExpDate(data.expiration);
-    setCvc(data.cvv);
+    setCardHolder(data.data.name_on_card);
+    setCardNumber(data.data.card_pan);
+    setBalance(data.data.amount + "  " + data.data.currency);
+    setExpDate(data.data.expiration);
+    setCvc(data.data.cvv);
   };
 
   return (
