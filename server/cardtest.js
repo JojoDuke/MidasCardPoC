@@ -55,6 +55,6 @@ app.post("/", jsonParser, async (req, res) => {
 
 app.use(bodyParser.json());
 
-app.listen(5000, () => {console.log("Server started on port 5000")})
+app.listen(5000, () => {console.log("Server started on port 5000")}) // Run the server on port 5000
 
 //createVcard();
