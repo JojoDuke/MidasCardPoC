@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import axios from 'axios'
 import './App.css';
@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   const cardHolderRef = useRef("");
   const balanceRef = useRef("");
-  const mobileNumRef = useRef("");
+  const [loading, setLoading] = useState(false); // This is for dynamic loading
   const [cardHolder, setCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [balance, setBalance] = useState("");
@@ -21,6 +21,8 @@ function App() {
 
   // Instance of a new virtual card(API call)
   const newCard = async () => {
+    setLoading(true);
+
     const { data, statusText } = await axios.post("http://localhost:5000/", {
       cardHolder: cardHolderRef.current.value,
       balance: balanceRef.current.value
@@ -33,6 +35,8 @@ function App() {
     setBalance(data.data.amount + "  " + data.data.currency);
     setExpDate(data.data.expiration);
     setCvc(data.data.cvv);
+
+    setLoading(false);
   };
 
   //#region PAYSTACK INTEGRTION
@@ -51,7 +55,7 @@ function App() {
   };
   
   const onClose = () => {
-    //console.log("any");
+    //console.log("any")
   };
 
   const initializePayment = usePaystackPayment(config);
@@ -89,7 +93,7 @@ function App() {
             ref={balanceRef}></input>
         </form>
         <button className='createCardBtn' onClick={createCardData}>
-          Create Card
+          {loading ? "Loading..." : "Create Card"}
         </button>
       </div>
     </div>
