@@ -1,9 +1,6 @@
-const PayStack = require('paystack-node');
 const https = require('https');
-const environment = process.env.NODE_ENV;
 
-const APIKEY = 'sk_live_e8b08880b294611e6a6c8e6daf02f4fbe78fddfd'
-const paystack = new PayStack(APIKEY, environment);
+const APIKEY = 'sk_live_e8b08880b294611e6a6c8e6daf02f4fbe78fddfd';
 
 const params = JSON.stringify({
     "amount": 100,
@@ -18,7 +15,7 @@ const params = JSON.stringify({
   const options = {
     hostname: 'api.paystack.co',
     port: 443,
-    path: '/charge/',
+    path: '/charge',
     method: 'POST',
     headers: {
       Authorization: `Bearer ${ APIKEY }`,
