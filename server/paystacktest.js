@@ -1,10 +1,10 @@
 const https = require('https');
 
-const APIKEY = 'sk_live_e8b08880b294611e6a6c8e6daf02f4fbe78fddfd';
+const APIKEY = 'sk_live_95295f9cf3433e9918b9387b8b93a3acdee920c6';
 
 const params = JSON.stringify({
     "amount": 100,
-    "email": "jojoamankwa@gmail.com",
+    "email": "dukeopoku@gmail.com",
     "currency": "GHS",
     "mobile_money": { 
       "phone": "0240369071", 
