@@ -13,7 +13,7 @@ app.use(cors());
 const APIKEY = 'sk_live_95295f9cf3433e9918b9387b8b93a3acdee920c6';
 
 const params = JSON.stringify({
-    "amount": 100,
+    "amount": 104,
     "email": "dukeopoku@gmail.com",
     "currency": "GHS",
     "mobile_money": { 
@@ -35,15 +35,17 @@ const params = JSON.stringify({
     data: params
   }
 
-  
-  app.get("/perform", async (req, res) => {
-    axios(options)
+  axios(options)
       .then(response => {
-        res.send((response.data));
+        console.log((response.data));
       })
       .catch(error => {
-        res.send(error);
+        console.log(error);
       })
+
+  
+  app.get("/", async (req, res) => {
+    
   });
 
   app.listen(PORT, () => {
